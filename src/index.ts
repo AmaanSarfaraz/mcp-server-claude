@@ -1162,7 +1162,9 @@ async function main() {
   if (useHttpTransport) {
     // Set up StreamableHTTP transport
     try {
-      await setupStreamableHttpServer(server, 3000);
+      // Use PORT from environment variable (provided by cloud platforms) or default to 3000
+      const port = parseInt(process.env.PORT || '3000', 10);
+      await setupStreamableHttpServer(server, port);
     } catch (error) {
       console.error('Error setting up StreamableHTTP server:', error);
       process.exit(1);
